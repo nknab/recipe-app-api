@@ -12,9 +12,9 @@ EXPOSE 8000
 ARG DEV=false
 RUN python -m venv /venv && \
     /venv/bin/pip install --upgrade pip && \
-    apk add --update --no-cache mariadb-connector-c-dev && \
+    apk add --update --no-cache postgresql-client && \
     apk add --update --no-cache --virtual .tmp-build-deps \
-    build-base python3-dev mariadb-dev linux-headers && \
+        build-base postgresql-dev musl-dev && \
     /venv/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /venv/bin/pip install -r /tmp/requirements.dev.txt ; \
